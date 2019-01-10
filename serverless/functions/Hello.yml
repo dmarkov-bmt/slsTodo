@@ -63,23 +63,55 @@ remove:
         method: delete
         integration: lambda
         cors: true
+  request:
+    parameters:
+      paths:
+        id: true
   response:
     headers:
       Access-Control-Allow-Origin: "'*'"
       Content-Type: "'application/json'"
     template: $input.json('$')
 
-#removeAll:
-#  handler: api/hello/handler.removeAll
-#  events:
-#    - http:
-#        path: hello
-#        method: delete
-#        integration: lambda
-#        cors: true
-#  response:
-#    headers:
-#      Access-Control-Allow-Origin: "'*'"
-#      Content-Type: "'application/json'"
-#    template: $input.json('$')
+removeAll:
+  handler: api/hello/handler.removeAll
+  events:
+    - http:
+        path: hello
+        method: delete
+        integration: lambda
+        cors: true
+  response:
+    headers:
+      Access-Control-Allow-Origin: "'*'"
+      Content-Type: "'application/json'"
+    template: $input.json('$')
+
+complete:
+  handler: api/hello/handler.complete
+  events:
+    - http:
+        path: hello/update
+        method: put
+        integration: lambda
+        cors: true
+  response:
+    headers:
+      Access-Control-Allow-Origin: "'*'"
+      Content-Type: "'application/json'"
+    template: $input.json('$')
+
+completeAll:
+  handler: api/hello/handler.completeAll
+  events:
+    - http:
+        path: hello/
+        method: put
+        integration: lambda
+        cors: true
+  response:
+    headers:
+      Access-Control-Allow-Origin: "'*'"
+      Content-Type: "'application/json'"
+    template: $input.json('$')
 

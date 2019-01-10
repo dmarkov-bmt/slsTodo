@@ -47,6 +47,7 @@ custom:
     start:
       port: 8000
       inMemory: true
+#      dbPath: ${env:PWD}
       migrate: true
       seed: true
       convertEmptyValues: true
