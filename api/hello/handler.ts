@@ -31,8 +31,11 @@ export async function remove(event) {
 }
 
 export function removeAll(event) {
-
-  return;
+  const data = [{id: String}];
+  event.body.forEach(todoItem => {
+    data.push({id: todoItem.id})
+  });
+  return Todo.batchDelete(data);
 }
 
 export function complete(event) {
