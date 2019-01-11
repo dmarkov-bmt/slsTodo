@@ -1,26 +1,7 @@
 import { errorHandler } from '../helper/error-handler';
 
 const uuid = require('uuid/v1');
-const dynamoose = require('dynamoose');
-const Schema = dynamoose.Schema;
-dynamoose.AWS.config.update({
-  region: 'us-east-1',
-});
-dynamoose.local();
-
-const todoSchema = new Schema({
-  id: {
-    type: String,
-  },
-  value: {
-    type: String,
-  },
-  isActive: {
-    type: Boolean,
-  },
-});
-
-let Todo = dynamoose.model(process.env.USERS_TABLE, todoSchema);
+let Todo = require('./dynamodb');
 
 export function create(event) {
 
@@ -49,19 +30,21 @@ export async function remove(event) {
 
 }
 
-export function removeAll() {
+export function removeAll(event) {
+
   return;
 }
 
 export function complete(event) {
   const data = { id: event.body.data.id, value: event.body.data.value, isActive: event.body.data.isActive };
   const todo = new Todo({ id: data.id, isActive: data.isActive, value: data.value });
-  console.log(data.isActive);
   return todo.save()
     .then(() => '')
     .catch((err) => errorHandler(err));
 }
 
-export function completeAll() {
-
+export function completeAll(event) {
+  const data = event.body.data;
+  console.log(data);
+  return Todo.batchPut(data);
 }

@@ -1,15 +1,22 @@
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const dynamoose = require('dynamoose');
+const Schema = dynamoose.Schema;
+dynamoose.AWS.config.update({
+  region: 'us-east-1',
+});
+dynamoose.local();
 
-let options = {};
+const todoSchema = new Schema({
+  id: {
+    type: String,
+  },
+  value: {
+    type: String,
+  },
+  isActive: {
+    type: Boolean,
+  },
+});
 
-// connect to local DB if running offline
-if (process.env.IS_OFFLINE) {
-  options = {
-    region: 'localhost',
-    endpoint: 'http://localhost:8000',
-  };
-}
 
-const client = new AWS.DynamoDB.DocumentClient(options);
+module.exports = dynamoose.model(process.env.USERS_TABLE, todoSchema);
 
-module.exports = client;

@@ -77,7 +77,7 @@ removeAll:
   handler: api/hello/handler.removeAll
   events:
     - http:
-        path: hello
+        path: hello/
         method: delete
         integration: lambda
         cors: true
