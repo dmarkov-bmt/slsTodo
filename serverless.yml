@@ -19,7 +19,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:BatchGetItem
         - dynamodb:BatchWriteItem
-      Resource: arn:aws:dynamodb:*:*:table/${self:provider.environment.USERS_TABLE}
+      Resource: arn:aws:dynamodb:*:*:table/${self:provider.environment.TODO_TABLE}
 #    - Effect: Allow
 #      Action:
 #        - s3:*

@@ -1,5 +1,4 @@
 import { errorHandler } from '../helper/error-handler';
-
 const uuid = require('uuid/v1');
 let Todo = require('./dynamodb');
 
@@ -31,9 +30,9 @@ export async function remove(event) {
 }
 
 export function removeAll(event) {
-  const data = [{id: String}];
+  const data = [{ id: String }];
   event.body.forEach(todoItem => {
-    data.push({id: todoItem.id})
+    data.push({ id: todoItem.id });
   });
   return Todo.batchDelete(data);
 }

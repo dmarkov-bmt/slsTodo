@@ -15,4 +15,4 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
-      TableName: ${self:provider.environment.USERS_TABLE}
+      TableName: ${self:provider.environment.TODO_TABLE}

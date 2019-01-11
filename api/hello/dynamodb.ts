@@ -18,5 +18,5 @@ const todoSchema = new Schema({
 });
 
 
-module.exports = dynamoose.model(process.env.USERS_TABLE, todoSchema);
+module.exports = dynamoose.model(process.env.TODO_TABLE, todoSchema);
 
