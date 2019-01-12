@@ -1,4 +1,5 @@
 import { errorHandler } from '../helper/error-handler';
+
 const uuid = require('uuid/v1');
 let Todo = require('./dynamodb');
 
@@ -37,12 +38,15 @@ export function removeAll(event) {
   return Todo.batchDelete(data);
 }
 
-export function update(event) {
-  const data = { id: event.body.data.id, value: event.body.data.value, isActive: event.body.data.isActive };
-  const todo = new Todo({ id: data.id, isActive: data.isActive, value: data.value });
-  return todo.save()
-    .then(() => '')
-    .catch((err) => errorHandler(err));
+export async function update(event) {
+  try {
+    return await Todo.update({ id: event.body.data.id }, {
+      value: event.body.data.value,
+      isActive: event.body.data.isActive,
+    });
+  } catch (err) {
+    return errorHandler(err);
+  }
 }
 
 export function completeAll(event) {
