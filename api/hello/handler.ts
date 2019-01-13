@@ -19,7 +19,7 @@ export function create(event) {
   });
 }
 
-export async function list(event) {
+export async function list() {
   return Todo.scan().exec();
 }
 
@@ -51,6 +51,5 @@ export async function update(event) {
 
 export function completeAll(event) {
   const data = event.body.data;
-  console.log(data);
   return Todo.batchPut(data);
 }
